@@ -7,10 +7,10 @@
 
     <!-- ===== Identificación del proyecto ===== -->
     <groupId>org.is2.frameworks</groupId>
-    <artifactId>LoginJSF</artifactId>
+    <artifactId>RidesJSF</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>LoginJSF</name>
+    <name>RidesJSF</name>
 
     <!-- ===== Propiedades ===== -->
     <properties>
