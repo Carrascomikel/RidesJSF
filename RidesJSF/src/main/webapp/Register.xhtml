@@ -21,7 +21,8 @@
                     <tr>
                         <td>Izena:</td>
                         <td>
-                            <h:inputText id="izen" value="#{register.izena}" required="true" />
+                            <h:inputText id="izen" value="#{register.izena}" required="true"
+                            requiredMessage="Izena beharrezkoa da" />
                         </td>
                         <td>
                             <h:message for="izen" style="color:red" />
@@ -30,7 +31,9 @@
                     <tr>
                         <td>Emaila:</td>
                         <td>
-                            <h:inputText id="emaila" value="#{register.emaila}" required="true">
+                            <h:inputText id="emaila" value="#{register.emaila}" required="true" placeholder="example@gmail.com"
+                            requiredMessage="Emaila beharrezkoa da"
+                            validatorMessage="Emaila gaizki idatzita dago">
                             	 <f:validateRegex pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.com$" />
                             </h:inputText> 
                             

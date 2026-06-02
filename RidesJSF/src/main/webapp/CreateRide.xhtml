@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <f:view>
+
+        <h:head>
+            <title>Rides Aplikazioa</title>
+        </h:head>
+
+        <h:body>
+            <h:form>
+
+                <h3>Create Ride</h3>
+
+                <table>
+                    <tr>
+                        <td>Depart City:</td>
+                        <td>
+                            <h:inputText id="departCity" value="#{ride.departCity}" required="true" />
+                        </td>
+                        <td>
+                            <h:message for="departCity" style="color:red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Arrival City:</td>
+                        <td>
+                            <h:inputText id="arrivalCity" value="#{ride.arrivalCity}" required="true" />
+                        </td>
+                        <td>
+                            <h:message for="arrivalCity" style="color:red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Number of Seats:</td>
+                        <td>
+                            <h:inputText id="seats" value="#{ride.seats}" required="true">
+                                <f:validateLongRange minimum="1" maximum="8" />
+                            </h:inputText>
+                        </td>
+                        <td>
+                            <h:message for="seats" style="color:red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Price:</td>
+                        <td>
+                            <h:inputText id="price" value="#{ride.price}" required="true">
+                                <f:validateDoubleRange minimum="0.0" />
+                            </h:inputText>
+                        </td>
+                        <td>
+                            <h:message for="price" style="color:red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ride Date:</td>
+                        <td>
+                            <h:inputText id="rideDate" value="#{ride.rideDate}" required="true">
+                                <f:convertDateTime pattern="yyyy/MM/dd" />
+                            </h:inputText>
+                        </td>
+                        <td>
+                            <h:message for="rideDate" style="color:red" />
+                        </td>
+                    </tr>
+
+                </table>
+
+                <p>
+                    <h:commandButton value="Create Ride" action="#{ride.createRide}" />
+                </p>
+
+            </h:form>
+        </h:body>
+
+    </f:view>
+
+</html>

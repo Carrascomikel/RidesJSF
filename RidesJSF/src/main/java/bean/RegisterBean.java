@@ -14,7 +14,7 @@ public class RegisterBean {
     private String pasahitzaBerretsi;
     private String rola;
 
-
+    public RegisterBean() {}
 
     public String getIzena() {
         return izena;

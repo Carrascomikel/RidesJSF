@@ -8,18 +8,18 @@ import jakarta.inject.Named;
 @Named("login")
 @SessionScoped
 public class LoginBean implements Serializable {
-	private String izena;
+	private String email;
 	private String pasahitza;
 
 	public LoginBean() {
 	}
-
-	public String getIzena() {
-		return izena;
+	
+	public String getEmail() {
+		return email;
 	}
 
-	public void setIzena(String izena) {
-		this.izena = izena;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPasahitza() {
@@ -29,11 +29,7 @@ public class LoginBean implements Serializable {
 	public void setPasahitza(String pasahitza) {
 		this.pasahitza = pasahitza;
 	}
-
-	public String egiaztatu() {
-		if (izena.equals("pirata"))
-			return "error";
-		else
-			return "ok";
+	public void egiaztatu() {
+		System.out.print("Egoki Logeatu da.");
 	}
 }
