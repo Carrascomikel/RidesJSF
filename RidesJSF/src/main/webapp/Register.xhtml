@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <f:view>
 
@@ -31,7 +32,7 @@
                     <tr>
                         <td>Emaila:</td>
                         <td>
-                            <h:inputText id="emaila" value="#{register.emaila}" required="true" placeholder="example@gmail.com"
+                            <h:inputText id="emaila" value="#{register.emaila}" required="true" pt:placeholder="example@gmail.com"
                             requiredMessage="Emaila beharrezkoa da"
                             validatorMessage="Emaila gaizki idatzita dago">
                             	 <f:validateRegex pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.com$" />
