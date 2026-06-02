@@ -55,7 +55,9 @@ public class RegisterBean {
 
     	
         if (!pasahitza.equals(pasahitzaBerretsi)) {
-            return "register?faces-redirect=true&error=pasahitza";
+        	System.out.print("Pasahitza berdinak izan behar dute.");
+        	return "register?faces-redirect=true&error=pasahitza";
+            
         }
 
         // TODO: Gordetzeko logika gehitu (datu-basea, etc.)
