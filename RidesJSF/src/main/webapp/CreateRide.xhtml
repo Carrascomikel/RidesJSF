@@ -21,9 +21,14 @@
 			<table>
 				<tr>
 					<td>Depart City:</td>
-					<td><h:inputText id="departCity" value="#{CR.departCity}"
-							required="true" /></td>
+					<td><h:selectOneMenu id="departCity"
+							value="#{CR.departCity}" required="true">
+							<f:selectItem itemValue="" itemLabel="Select a Depart city"
+								noSelectionOption="true" />
+							<f:selectItems value="#{CR.departCitys}" />
+						</h:selectOneMenu></td>
 					<td><h:message for="departCity" style="color:red" /></td>
+
 				</tr>
 				<tr>
 					<td>Arrival City:</td>
@@ -50,8 +55,8 @@
 				<!-- Data jartzea falta da. -->
 				<tr>
 					<td>Ride Date:</td>
-					<td><p:calendar id="data" value="#{CR.date}"
-							navigator="true" mode="inline">
+					<td><p:calendar id="data" value="#{CR.date}" navigator="true"
+							mode="inline">
 						</p:calendar></td>
 				</tr>
 			</table>
