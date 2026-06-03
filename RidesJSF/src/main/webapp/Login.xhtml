@@ -9,31 +9,32 @@
 <f:view>
 
 	<h:head>
-		<title>Rides Aplikazioa</title>
+		<title>Rides app</title>
 		<h:outputStylesheet library="css" name="style.css" />
 	</h:head>
 
 	<h:body>
 		<h:form>
 
-			<h3>Mesedez, sartu izena eta pasahitza</h3>
+			<h3>Please, insert your email and password</h3>
 
 			<table>
 				<tr>
 					<td>Email:</td>
-					<td><h:inputText id="email" value="#{login.email}" /></td>
+					<td><h:inputText id="email" value="#{login.email}" required="true" requiredMessage="You forgot the email" /></td>
+					<td><h:message for="pass" errorClass="error-msg" /></td>
 				</tr>
 				<tr>
 					<td>Password:</td>
-					<td><h:inputSecret id="pass" value="#{login.pasahitza}" /></td>
-					<td><h:message for="pass" style="color:red" /></td>
+					<td><h:inputSecret id="pass" value="#{login.pasahitza}" required="true" requiredMessage="You forgot the password" /></td>
+					<td><h:message for="pass" errorClass="error-msg" /></td>
 				</tr>
 			</table>
 
 			<p>
-				<h:commandButton value="Onartu" action="#{login.egiaztatu}" />
+				<h:commandButton value="Login" action="#{login.egiaztatu}" />
 			</p>
-			<h:link value='Oraindik ez zara erregistratu?' outcome='register'></h:link>
+			<h:link value='Havent you registered yet?' styleClass="link" outcome='register'></h:link>
 		</h:form>
 
 	</h:body>
