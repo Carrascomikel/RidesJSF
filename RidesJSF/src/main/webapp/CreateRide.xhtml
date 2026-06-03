@@ -11,6 +11,7 @@
 
 	<h:head>
 		<title>Rides Aplikazioa</title>
+		<h:outputStylesheet library="css" name="style.css" />
 	</h:head>
 
 	<h:body>
@@ -23,14 +24,14 @@
 					<td>Depart City:</td>
 					<td><h:selectOneMenu id="departCity" value="#{CR.departCity}"
 							required="true"
-							requiredMeesage="You must select a departure city ">
+							requiredMessage="You must select a departure city ">
 							<f:selectItem itemValue="" itemLabel="Select a Depart city"
 								noSelectionOption="true" />
 							<f:selectItems value="#{CR.departCitys}" />
 							<p:ajax event="change" listener="#{CR.departCityChange}"
 								update="arrivalCity" />
 						</h:selectOneMenu></td>
-					<td><h:message for="departCity" style="color:#cf6679" /></td>
+					<td><h:message for="departCity" errorClass="error-msg" /></td>
 
 				</tr>
 				<tr>
@@ -43,17 +44,16 @@
 							<f:selectItems value="#{CR.arrivalCitys}" />
 
 						</h:selectOneMenu></td>
-					<td><h:message for="departCity" style="color:#cf6679" /></td>
+					<td><h:message for="departCity" errorClass="error-msg" /></td>
 				</tr>
 				<tr>
 					<td>Number of Seats:</td>
 					<td><h:inputText id="seats" value="#{CR.numberOfSeats}"
 							required="true"
-							requiredMessage="You must select the number of seats available"
 							validatorMessage="Inappropriate number of seats">
 							<f:validateLongRange minimum="1" maximum="6" />
 						</h:inputText></td>
-					<td><h:message for="seats" style="color:#cf6679" /></td>
+					<td><h:message for="seats" errorClass="error-msg" /></td>
 				</tr>
 				<tr>
 					<td>Price:</td>
@@ -62,7 +62,7 @@
 							validatorMessage="Insert an appropiate price">
 							<f:validateDoubleRange minimum="0" />
 						</h:inputText></td>
-					<td><h:message for="price" style="color:#cf6679" /></td>
+					<td><h:message for="price" errorClass="error-msg" /></td>
 				</tr>
 				<tr>
 					<td>Ride Date:</td>
@@ -75,8 +75,8 @@
 			<p>
 				<h:commandButton value="Create Ride" action="#{CR.bidaiaSortu}" />
 			</p>
-			<h:messages globalOnly="true" infoStyle="color: #4a90e2; font-weight: bold;"
-				errorStyle="color: #cf6679; font-weight: bold;" />
+			<h:messages globalOnly="true" infoClass="success-msg"
+				errorClass="error-msg"/>
 		</h:form>
 	</h:body>
 

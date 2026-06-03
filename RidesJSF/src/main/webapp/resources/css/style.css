@@ -123,20 +123,67 @@ form {
 }
 
 /* --- Table layout (login/register forms) --- */
+/*
+   Solo aplicamos el layout de columna a tablas que están
+   dentro de un formulario (.form-table), no a calendarios
+   ni otros componentes de terceros (PrimeFaces, etc.)
+*/
 table {
-  width: 100%;
   border-collapse: collapse;
+}
+
+/* Tablas de formulario (login, register, etc.) */
+form > table,
+.form-table {
+  width: 100%;
   margin-bottom: 1.25rem;
 }
 
-table tr {
+form > table tr,
+.form-table tr {
   display: flex;
   flex-direction: column;
   margin-bottom: 1.1rem;
 }
 
-table tr td {
+form > table tr td:first-child,
+.form-table tr td:first-child {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.35rem;
   padding: 0;
+}
+
+form > table tr td,
+.form-table tr td {
+  padding: 0;
+}
+
+/* Calendarios y datepickers: restablecer comportamiento nativo de tabla */
+.ui-datepicker table,
+.ui-datepicker tr,
+.ui-datepicker td,
+.ui-datepicker th,
+[class*="calendar"] table,
+[class*="calendar"] tr,
+[class*="calendar"] td,
+[class*="calendar"] th,
+[class*="datepicker"] table,
+[class*="datepicker"] tr,
+[class*="datepicker"] td,
+[class*="datepicker"] th {
+  display: revert !important;
+  flex-direction: revert !important;
+  margin-bottom: 0 !important;
+  padding: revert !important;
+  font-size: revert !important;
+  font-weight: revert !important;
+  letter-spacing: revert !important;
+  text-transform: revert !important;
+  color: revert !important;
 }
 
 /* --- Inputs --- */
@@ -248,16 +295,18 @@ p {
 .error-msg,
 span[style*="color:red"],
 .ui-message-error {
-  font-size: 0.78rem;
+  font-size: 1rem;
   color: var(--color-error) !important;
-  margin-top: 0.25rem;
+  margin-top: 0.50rem;
   display: block;
 }
 
 .success-msg {
-  font-size: 0.78rem;
+  font-size: 1rem;
+  list-style: none;
+  padding-left: 0;
   color: var(--color-success);
-  margin-top: 0.25rem;
+  margin-top: 0.50rem;
 }
 
 /* --- Global messages panel (h:messages) --- */
