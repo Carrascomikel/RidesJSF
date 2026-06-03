@@ -30,7 +30,7 @@
 							<p:ajax event="change" listener="#{CR.departCityChange}"
 								update="arrivalCity" />
 						</h:selectOneMenu></td>
-					<td><h:message for="departCity" style="color:red" /></td>
+					<td><h:message for="departCity" style="color:#cf6679" /></td>
 
 				</tr>
 				<tr>
@@ -43,7 +43,7 @@
 							<f:selectItems value="#{CR.arrivalCitys}" />
 
 						</h:selectOneMenu></td>
-					<td><h:message for="departCity" style="color:red" /></td>
+					<td><h:message for="departCity" style="color:#cf6679" /></td>
 				</tr>
 				<tr>
 					<td>Number of Seats:</td>
@@ -53,7 +53,7 @@
 							validatorMessage="Inappropriate number of seats">
 							<f:validateLongRange minimum="1" maximum="6" />
 						</h:inputText></td>
-					<td><h:message for="seats" style="color:red" /></td>
+					<td><h:message for="seats" style="color:#cf6679" /></td>
 				</tr>
 				<tr>
 					<td>Price:</td>
@@ -62,7 +62,7 @@
 							validatorMessage="Insert an appropiate price">
 							<f:validateDoubleRange minimum="0" />
 						</h:inputText></td>
-					<td><h:message for="price" style="color:red" /></td>
+					<td><h:message for="price" style="color:#cf6679" /></td>
 				</tr>
 				<tr>
 					<td>Ride Date:</td>
