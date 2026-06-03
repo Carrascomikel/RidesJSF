@@ -21,12 +21,14 @@
 			<table>
 				<tr>
 					<td>Depart City:</td>
-					<td><h:selectOneMenu id="departCity"
-							value="#{CR.departCity}" required="true">
+					<td><h:selectOneMenu id="departCity" value="#{CR.departCity}"
+							required="true"
+							requiredMeesage="You must select a departure city ">
 							<f:selectItem itemValue="" itemLabel="Select a Depart city"
 								noSelectionOption="true" />
 							<f:selectItems value="#{CR.departCitys}" />
-							<p:ajax event="change" listener="#{CR.departCityChange}" update="arrivalCity"/>
+							<p:ajax event="change" listener="#{CR.departCityChange}"
+								update="arrivalCity" />
 						</h:selectOneMenu></td>
 					<td><h:message for="departCity" style="color:red" /></td>
 
@@ -34,31 +36,34 @@
 				<tr>
 					<td>Arrival City:</td>
 					<td><h:selectOneMenu id="arrivalCity"
-							value="#{CR.arrivalCity}" required="true">
+							value="#{CR.arrivalCity}" required="true"
+							requiredMessage="You must select an arrival city">
 							<f:selectItem itemValue="" itemLabel="Select an Arrival city"
 								noSelectionOption="true" />
 							<f:selectItems value="#{CR.arrivalCitys}" />
-							
+
 						</h:selectOneMenu></td>
 					<td><h:message for="departCity" style="color:red" /></td>
 				</tr>
 				<tr>
 					<td>Number of Seats:</td>
 					<td><h:inputText id="seats" value="#{CR.numberOfSeats}"
-							required="true">
-							<f:validateLongRange minimum="1" maximum="8" />
+							required="true"
+							requiredMessage="You must select the number of seats available"
+							validatorMessage="Inappropriate number of seats">
+							<f:validateLongRange minimum="1" maximum="6" />
 						</h:inputText></td>
 					<td><h:message for="seats" style="color:red" /></td>
 				</tr>
 				<tr>
 					<td>Price:</td>
 					<td><h:inputText id="price" value="#{CR.price}"
-							required="true">
-							<f:validateDoubleRange minimum="0.0" />
+							required="true" requiredMessage="You must enter the ride price"
+							validatorMessage="Insert an appropiate price">
+							<f:validateDoubleRange minimum="0" />
 						</h:inputText></td>
 					<td><h:message for="price" style="color:red" /></td>
 				</tr>
-				<!-- Data jartzea falta da. -->
 				<tr>
 					<td>Ride Date:</td>
 					<td><p:calendar id="data" value="#{CR.date}" navigator="true"
@@ -68,9 +73,10 @@
 			</table>
 
 			<p>
-				<h:commandButton value="Create Ride" action="#{CR.createRide}" />
+				<h:commandButton value="Create Ride" action="#{CR.bidaiaSortu}" />
 			</p>
-
+			<h:messages globalOnly="true" infoStyle="color: #4a90e2; font-weight: bold;"
+				errorStyle="color: #cf6679; font-weight: bold;" />
 		</h:form>
 	</h:body>
 

@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import domain.Ride;
+import exceptions.RideAlreadyExistException;
+import exceptions.RideMustBeLaterThanTodayException;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.inject.Named;
-
 
 @Named("CR")
 @SessionScoped
@@ -16,14 +20,13 @@ public class CreateRide implements Serializable {
 	private String departCity;
 	private String arrivalCity;
 	private int numberOfSeats;
-	private double price;
+	private float price;
 	private Date date;
 	private List<String> departCitys = new ArrayList<String>();
 	private List<String> arrivalCitys = new ArrayList<String>();
 
 	public CreateRide() {
 		departCitys = this.departures();
-		System.out.println(departCitys);
 	}
 
 	public List<String> getDepartCitys() {
@@ -33,7 +36,6 @@ public class CreateRide implements Serializable {
 	public void setDepartCitys(List<String> departCitys) {
 		this.departCitys = departCitys;
 	}
-	
 
 	public List<String> getArrivalCitys() {
 		return arrivalCitys;
@@ -67,11 +69,11 @@ public class CreateRide implements Serializable {
 		this.numberOfSeats = numberOfSeats;
 	}
 
-	public double getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 
@@ -86,8 +88,33 @@ public class CreateRide implements Serializable {
 	public List<String> departures() {
 		return FacadeBean.getBusinessLogic().getDepartCities();
 	}
-	
+
 	public void departCityChange(AjaxBehaviorEvent event) {
-		arrivalCitys=FacadeBean.getBusinessLogic().getDestinationCities(departCity);
+		arrivalCitys = FacadeBean.getBusinessLogic().getDestinationCities(departCity);
+	}
+
+	public void bidaiaSortu() {
+		String dEmail = "driver3@gmail.com";
+		try {
+			 FacadeBean.getBusinessLogic().createRide(departCity, arrivalCity, date, numberOfSeats, price,
+					dEmail);
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Ride created succesfully", null));
+		} catch (RideAlreadyExistException e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ride already exists", null));
+		} catch (RideMustBeLaterThanTodayException e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ride must be later than today", null));
+		}
+		this.cleanForm();
+	}
+	public void cleanForm() {
+		this.arrivalCity=null;
+		this.departCity=null;
+		this.price=0;
+		this.numberOfSeats=0;
+		this.date=null;
+		
 	}
 }
