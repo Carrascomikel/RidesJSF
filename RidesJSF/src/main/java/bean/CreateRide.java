@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.inject.Named;
+
 
 @Named("CR")
 @SessionScoped
@@ -84,8 +86,8 @@ public class CreateRide implements Serializable {
 	public List<String> departures() {
 		return FacadeBean.getBusinessLogic().getDepartCities();
 	}
-
-	public List<String> arrivals() {
-		return FacadeBean.getBusinessLogic().getDestinationCities(arrivalCity);
+	
+	public void departCityChange(AjaxBehaviorEvent event) {
+		arrivalCitys=FacadeBean.getBusinessLogic().getDestinationCities(departCity);
 	}
 }

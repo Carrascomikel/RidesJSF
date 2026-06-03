@@ -26,15 +26,21 @@
 							<f:selectItem itemValue="" itemLabel="Select a Depart city"
 								noSelectionOption="true" />
 							<f:selectItems value="#{CR.departCitys}" />
+							<p:ajax event="change" listener="#{CR.departCityChange}" update="arrivalCity"/>
 						</h:selectOneMenu></td>
 					<td><h:message for="departCity" style="color:red" /></td>
 
 				</tr>
 				<tr>
 					<td>Arrival City:</td>
-					<td><h:inputText id="arrivalCity" value="#{CR.arrivalCity}"
-							required="true" /></td>
-					<td><h:message for="arrivalCity" style="color:red" /></td>
+					<td><h:selectOneMenu id="arrivalCity"
+							value="#{CR.arrivalCity}" required="true">
+							<f:selectItem itemValue="" itemLabel="Select an Arrival city"
+								noSelectionOption="true" />
+							<f:selectItems value="#{CR.arrivalCitys}" />
+							
+						</h:selectOneMenu></td>
+					<td><h:message for="departCity" style="color:red" /></td>
 				</tr>
 				<tr>
 					<td>Number of Seats:</td>
