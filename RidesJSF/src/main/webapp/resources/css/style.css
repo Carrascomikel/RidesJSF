@@ -445,3 +445,32 @@ span[style*="color:red"],
   h1 { font-size: 1.8rem; }
   h3 { font-size: 1.1rem; }
 }
+/* Título del dataTable (facet name="header") */
+.table-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--color-accent-2);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Filas alternas */
+.data-row-odd {
+  background: var(--color-surface);
+}
+
+.data-row-even {
+  background: var(--color-bg);
+}
+
+/* Cabecera del dataTable */
+.data-table-header {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-align: left;
+}

@@ -53,7 +53,34 @@
 						</p:calendar></td>
 				</tr>
 			</table>
+			<h:commandButton value="Query Rides" action="#{QR.bidaiaBilatu}" />
+
 		</h:form>
+
+		<div class="form-card">
+			<h:dataTable id="taula" value="#{QR.rides}" var="ride"
+				styleClass="data-table" headerClass="data-table-header"
+				rowClasses="data-row-odd,data-row-even">
+
+				<f:facet name="header">
+					<span class="table-title">Rides</span>
+				</f:facet>
+
+				<h:column>
+					<f:facet name="header">Driver</f:facet>
+            #{ride.driver.email}
+        </h:column>
+				<h:column>
+					<f:facet name="header">Seats</f:facet>
+            #{ride.nPlaces}
+        </h:column>
+				<h:column>
+					<f:facet name="header">Price</f:facet>
+            #{ride.price}
+        </h:column>
+			</h:dataTable>
+		</div>
+
 	</h:body>
 
 </f:view>
