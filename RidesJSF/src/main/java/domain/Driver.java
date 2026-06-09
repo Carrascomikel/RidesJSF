@@ -12,19 +12,12 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
-public class Driver implements Serializable {
+public class Driver extends User {
 	
 	/**
 	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@XmlID
-	@Id 
-	private String email;
-	private String name; 
-	@XmlIDREF
+	 */ 
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Ride> rides=new Vector<Ride>();
 
@@ -32,34 +25,9 @@ public class Driver implements Serializable {
 		super();
 	}
 
-	public Driver(String email, String name) {
-		this.email = email;
-		this.name = name;
+	public Driver(String email, String name,String password) {
+		super(email,name,password);
 	}
-	
-	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	
-	
-	public String toString(){
-		return email+";"+name+rides;
-	}
-	
 	/**
 	 * This method creates a bet with a question, minimum bet ammount and percentual profit
 	 * 
@@ -88,20 +56,7 @@ public class Driver implements Serializable {
 		
 		return false;
 	}
-		
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Driver other = (Driver) obj;
-		if (email != other.email)
-			return false;
-		return true;
-	}
+
 
 	public Ride removeRide(String from, String to, Date date) {
 		boolean found=false;
