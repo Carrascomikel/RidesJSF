@@ -1,25 +1,22 @@
 package dataAccess;
 
-import java.io.File;
-import java.net.NoRouteToHostException;
-import java.text.ParseException;
+
 import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.Date;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 import java.util.ResourceBundle;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
 import javax.persistence.TypedQuery;
 
-import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.Driver;
 import domain.Ride;
+import eredua.JPAUtil;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 
@@ -28,90 +25,6 @@ import exceptions.RideMustBeLaterThanTodayException;
  */
 public class DataAccess  {
 	private  EntityManager  db;
-	private  EntityManagerFactory emf;
-
-
-	ConfigXML c=ConfigXML.getInstance();
-
-     public DataAccess()  {
-		if (c.isDatabaseInitialized()) {
-			String fileName=c.getDbFilename();
-
-			File fileToDelete= new File(fileName);
-			if(fileToDelete.delete()){
-				File fileToDeleteTemp= new File(fileName+"$");
-				fileToDeleteTemp.delete();
-
-				  System.out.println("File deleted");
-				} else {
-				  System.out.println("Operation failed");
-				}
-		}
-		open();
-		if  (c.isDatabaseInitialized())initializeDB();
-		
-		System.out.println("DataAccess created => isDatabaseLocal: "+c.isDatabaseLocal()+" isDatabaseInitialized: "+c.isDatabaseInitialized());
-
-		close();
-
-	}
-     
-    public DataAccess(EntityManager db) {
-    	this.db=db;
-    }
-
-	
-	
-	/**
-	 * This is the data access method that initializes the database with some events and questions.
-	 * This method is invoked by the business logic (constructor of BLFacadeImplementation) when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
-	 */	
-	public void initializeDB(){
-		
-		db.getTransaction().begin();
-
-		try {
-
-		   Calendar today = Calendar.getInstance();
-		   
-		   int month=today.get(Calendar.MONTH);
-		   int year=today.get(Calendar.YEAR);
-		   if (month==12) { month=1; year+=1;}  
-	    
-		   
-		    //Create drivers 
-			Driver driver1=new Driver("driver1@gmail.com","Aitor Fernandez");
-			Driver driver2=new Driver("driver2@gmail.com","Ane Gaztañaga");
-			Driver driver3=new Driver("driver3@gmail.com","Test driver");
-
-			
-			//Create rides
-			driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year,month,15), 4, 7);
-			driver1.addRide("Donostia", "Gazteiz", UtilDate.newDate(year,month,6), 4, 8);
-			driver1.addRide("Bilbo", "Donostia", UtilDate.newDate(year,month,25), 4, 4);
-
-			driver1.addRide("Donostia", "Iruña", UtilDate.newDate(year,month,7), 4, 8);
-			
-			driver2.addRide("Donostia", "Bilbo", UtilDate.newDate(year,month,15), 3, 3);
-			driver2.addRide("Bilbo", "Donostia", UtilDate.newDate(year,month,25), 2, 5);
-			driver2.addRide("Eibar", "Gasteiz", UtilDate.newDate(year,month,6), 2, 5);
-
-			driver3.addRide("Bilbo", "Donostia", UtilDate.newDate(year,month,14), 1, 3);
-
-			
-						
-			db.persist(driver1);
-			db.persist(driver2);
-			db.persist(driver3);
-
-	
-			db.getTransaction().commit();
-			System.out.println("Db initialized");
-		}
-		catch (Exception e){
-			e.printStackTrace();
-		}
-	}
 	
 	/**
 	 * This method returns all the cities where rides depart 
@@ -231,20 +144,7 @@ public class DataAccess  {
 	
 
 public void open(){
-		
-		String fileName=c.getDbFilename();
-		if (c.isDatabaseLocal()) {
-			emf = Persistence.createEntityManagerFactory("objectdb:"+fileName);
-			db = emf.createEntityManager();
-		} else {
-			Map<String, String> properties = new HashMap<String, String>();
-			  properties.put("javax.persistence.jdbc.user", c.getUser());
-			  properties.put("javax.persistence.jdbc.password", c.getPassword());
-
-			  emf = Persistence.createEntityManagerFactory("objectdb://"+c.getDatabaseNode()+":"+c.getDatabasePort()+"/"+fileName, properties);
-			  db = emf.createEntityManager();
-    	   }
-		System.out.println("DataAccess opened => isDatabaseLocal: "+c.isDatabaseLocal());
+		db=JPAUtil.getEntityManager();
 
 		
 	}
