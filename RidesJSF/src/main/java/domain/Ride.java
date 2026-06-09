@@ -11,21 +11,20 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
-@SuppressWarnings("serial")
-@XmlAccessorType(XmlAccessType.FIELD)
+
 @Entity
 public class Ride implements Serializable {
-	@XmlID
-	@Id 
-	@XmlJavaTypeAdapter(IntegerAdapter.class)
-	@GeneratedValue
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer rideNumber;
+	@Column(name = "departure")
 	private String from;
+	@Column(name = "destination")
 	private String to;
 	private int nPlaces;
 	private Date date;
 	private float price;
-	
+	@ManyToOne
 	private Driver driver;  
 	
 	public Ride(){

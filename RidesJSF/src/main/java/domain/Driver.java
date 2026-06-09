@@ -1,16 +1,11 @@
 package domain;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 
 @Entity
 public class Driver extends User {
@@ -18,8 +13,9 @@ public class Driver extends User {
 	/**
 	 * 
 	 */ 
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-	private List<Ride> rides=new Vector<Ride>();
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "driver")
+	private List<Ride> rides=new ArrayList<Ride>();
 
 	public Driver() {
 		super();

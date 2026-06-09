@@ -3,8 +3,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.jws.WebMethod;
-import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
@@ -16,34 +14,24 @@ import exceptions.RideAlreadyExistException;
 /**
  * It implements the business logic as a web service.
  */
-@WebService(endpointInterface = "businessLogic.BLFacade")
 public class BLFacadeImplementation  implements BLFacade {
-	DataAccess dbManager;
+	private DataAccess dbManager;
 
-	public BLFacadeImplementation()  {		
-		System.out.println("Creating BLFacadeImplementation instance");
-		
-		
-		    dbManager=new DataAccess();
-		    
-		//dbManager.close();
-
-		
-	}
+	
 	
     public BLFacadeImplementation(DataAccess da)  {
 		
 		System.out.println("Creating BLFacadeImplementation instance with DataAccess parameter");
-		ConfigXML c=ConfigXML.getInstance();
 		
-		dbManager=da;		
+		
+		dbManager=da;
 	}
     
     
     /**
      * {@inheritDoc}
      */
-    @WebMethod public List<String> getDepartCities(){
+     public List<String> getDepartCities(){
     	dbManager.open();	
 		
 		 List<String> departLocations=dbManager.getDepartCities();		
@@ -56,7 +44,7 @@ public class BLFacadeImplementation  implements BLFacade {
     /**
      * {@inheritDoc}
      */
-	@WebMethod public List<String> getDestinationCities(String from){
+	public List<String> getDestinationCities(String from){
 		dbManager.open();	
 		
 		 List<String> targetCities=dbManager.getArrivalCities(from);		
@@ -69,7 +57,7 @@ public class BLFacadeImplementation  implements BLFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-   @WebMethod
+   
    public Ride createRide( String from, String to, Date date, int nPlaces, float price, String driverEmail ) throws RideMustBeLaterThanTodayException, RideAlreadyExistException{
 	   
 		dbManager.open();
@@ -81,7 +69,7 @@ public class BLFacadeImplementation  implements BLFacade {
    /**
     * {@inheritDoc}
     */
-	@WebMethod 
+	
 	public List<Ride> getRides(String from, String to, Date date){
 		dbManager.open();
 		List<Ride>  rides=dbManager.getRides(from, to, date);
@@ -93,7 +81,7 @@ public class BLFacadeImplementation  implements BLFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	@WebMethod 
+	 
 	public List<Date> getThisMonthDatesWithRides(String from, String to, Date date){
 		dbManager.open();
 		List<Date>  dates=dbManager.getThisMonthDatesWithRides(from, to, date);
@@ -102,22 +90,6 @@ public class BLFacadeImplementation  implements BLFacade {
 	}
 	
 	
-	public void close() {
-		DataAccess dB4oManager=new DataAccess();
-
-		dB4oManager.close();
-
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-    @WebMethod	
-	 public void initializeBD(){
-    	dbManager.open();
-		dbManager.initializeDB();
-		dbManager.close();
-	}
-
+	
 }
 

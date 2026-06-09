@@ -22,29 +22,18 @@
 			<table>
 				<tr>
 					<td>Depart City:</td>
-					<td><h:selectOneMenu id="departCity" value="#{CR.departCity}"
-							required="true"
-							requiredMessage="You must select a departure city ">
-							<f:selectItem itemValue="" itemLabel="Select a Depart city"
-								noSelectionOption="true" />
-							<f:selectItems value="#{CR.departCitys}" />
-							<p:ajax event="change" listener="#{CR.departCityChange}"
-								update="arrivalCity" />
-						</h:selectOneMenu></td>
+					<td><h:inputText id="departCity" value="#{CR.departCity}" required="true">
+					
+					</h:inputText></td>
 					<td><h:message for="departCity" errorClass="error-msg" /></td>
 
 				</tr>
 				<tr>
 					<td>Arrival City:</td>
-					<td><h:selectOneMenu id="arrivalCity"
-							value="#{CR.arrivalCity}" required="true"
-							requiredMessage="You must select an arrival city">
-							<f:selectItem itemValue="" itemLabel="Select an Arrival city"
-								noSelectionOption="true" />
-							<f:selectItems value="#{CR.arrivalCitys}" />
-
-						</h:selectOneMenu></td>
-					<td><h:message for="departCity" errorClass="error-msg" /></td>
+					<td><h:inputText id="arrivalCity" value="#{CR.arrivalCity}" required="true">
+					
+					</h:inputText></td>
+					<td><h:message for="arrivalCity" errorClass="error-msg" /></td>
 				</tr>
 				<tr>
 					<td>Number of Seats:</td>

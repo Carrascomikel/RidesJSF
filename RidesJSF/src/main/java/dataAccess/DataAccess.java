@@ -88,7 +88,6 @@ public class DataAccess  {
 			return null;
 		}
 		
-		
 	}
 	
 	/**
@@ -145,13 +144,27 @@ public class DataAccess  {
 
 public void open(){
 		db=JPAUtil.getEntityManager();
+		try {
+            db.getTransaction().begin();
+            Driver driver = db.find(Driver.class, "driver3@gmail.com");
+            if (driver == null) {
+                driver = new Driver("driver3@gmail.com", "Driver Three", "1234");
+                db.persist(driver);
+                System.out.println(">> Driver inicial creado");
+            }
+            db.getTransaction().commit();
+        } catch (Exception e) {
+            if (db.getTransaction().isActive()) db.getTransaction().rollback();
+        }
 
 		
 	}
 
 	public void close(){
-		db.close();
-		System.out.println("DataAcess closed");
+		if (db != null && db.isOpen()) {
+            db.close();
+        }
+        System.out.println("DataAccess closed");
 	}
 	
 }

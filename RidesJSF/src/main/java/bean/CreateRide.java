@@ -22,29 +22,11 @@ public class CreateRide implements Serializable {
 	private int numberOfSeats;
 	private float price;
 	private Date date;
-	private List<String> departCitys = new ArrayList<String>();
-	private List<String> arrivalCitys = new ArrayList<String>();
+	
 
 	public CreateRide() {
-		departCitys =FacadeBean.getBusinessLogic().getDepartCities();
+		
 	}
-
-	public List<String> getDepartCitys() {
-		return departCitys;
-	}
-
-	public void setDepartCitys(List<String> departCitys) {
-		this.departCitys = departCitys;
-	}
-
-	public List<String> getArrivalCitys() {
-		return arrivalCitys;
-	}
-
-	public void setArrivalCitys(List<String> arrivalCitys) {
-		this.arrivalCitys = arrivalCitys;
-	}
-
 	public String getDepartCity() {
 		return departCity;
 	}
@@ -84,10 +66,7 @@ public class CreateRide implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public void departCityChange(AjaxBehaviorEvent event) {
-		arrivalCitys = FacadeBean.getBusinessLogic().getDestinationCities(departCity);
-	}
-
+	
 	public void bidaiaSortu() {
 		String dEmail = "driver3@gmail.com";
 		try {
