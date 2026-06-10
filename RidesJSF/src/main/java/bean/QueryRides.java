@@ -7,6 +7,7 @@ import java.util.List;
 
 import domain.Ride;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.bean.RequestScoped;
 import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.inject.Named;
 
@@ -23,8 +24,7 @@ public class QueryRides implements Serializable {
 	private List<Ride> rides= new ArrayList<Ride>();
 
 	public QueryRides() {
-		departCitys = FacadeBean.getBusinessLogic().getDepartCities();
-		;
+		this.berrabiaratu();
 	}
 
 	public String getDepartCity() {
@@ -68,6 +68,7 @@ public class QueryRides implements Serializable {
 	}
 
 	public void departCityChange(AjaxBehaviorEvent event) {
+		arrivalCitys=null;
 		arrivalCitys = FacadeBean.getBusinessLogic().getDestinationCities(departCity);
 	}
 	public void bidaiaBilatu() {
@@ -81,5 +82,8 @@ public class QueryRides implements Serializable {
 
 	public void setRides(List<Ride> rides) {
 		this.rides = rides;
+	}
+	public void berrabiaratu() {
+		departCitys = FacadeBean.getBusinessLogic().getDepartCities();
 	}
 }
