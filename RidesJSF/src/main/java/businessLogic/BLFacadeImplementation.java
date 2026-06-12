@@ -7,8 +7,10 @@ import java.util.ResourceBundle;
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
 import domain.Ride;
+import domain.User;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
+import exceptions.UserAlreadyExistsException;
 import exceptions.RideAlreadyExistException;
 
 /**
@@ -87,6 +89,17 @@ public class BLFacadeImplementation  implements BLFacade {
 		List<Date>  dates=dbManager.getThisMonthDatesWithRides(from, to, date);
 		dbManager.close();
 		return dates;
+	}
+
+
+
+
+	@Override
+	public User addUser(String email, String name, String password, String rol) throws UserAlreadyExistsException {
+		dbManager.open();
+		User u=dbManager.addUser(email, name, password, rol);
+		dbManager.close();
+		return u;
 	}
 	
 	

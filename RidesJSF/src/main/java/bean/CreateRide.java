@@ -12,6 +12,7 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.AjaxBehaviorEvent;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named("CR")
@@ -22,6 +23,8 @@ public class CreateRide implements Serializable {
 	private int numberOfSeats;
 	private float price;
 	private Date date;
+	@Inject
+	private LoginBean lb;
 	
 
 	public CreateRide() {
@@ -68,7 +71,7 @@ public class CreateRide implements Serializable {
 	}
 	
 	public void bidaiaSortu() {
-		String dEmail = "driver3@gmail.com";
+		String dEmail = lb.getEmail();
 		try {
 			 FacadeBean.getBusinessLogic().createRide(departCity, arrivalCity, date, numberOfSeats, price,
 					dEmail);

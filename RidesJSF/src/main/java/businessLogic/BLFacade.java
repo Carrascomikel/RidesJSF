@@ -5,8 +5,10 @@ import java.util.List;
 
 //import domain.Booking;
 import domain.Ride;
+import domain.User;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
+import exceptions.UserAlreadyExistsException;
 import exceptions.RideAlreadyExistException;
 
 
@@ -73,7 +75,9 @@ public interface BLFacade  {
 	 * This method calls the data access to initialize the database with some events and questions.
 	 * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
 	 */	
+
 	
+	public User addUser(String email,String name, String password, String rol) throws UserAlreadyExistsException;
 
 	
 }
