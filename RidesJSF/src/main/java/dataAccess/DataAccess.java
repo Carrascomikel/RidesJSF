@@ -18,6 +18,7 @@ import domain.Ride;
 import domain.Traveler;
 import domain.User;
 import eredua.JPAUtil;
+import exceptions.InvalidPasswordException;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.UserAlreadyExistsException;
@@ -141,7 +142,19 @@ public class DataAccess {
 			return null;
 		}
 	}
-
+	public User login(String email, String password) 
+	        throws InvalidPasswordException {
+	    
+	        User u = this.getUserByEmail(email);
+	        
+	        if (u == null)
+	        	return null;
+	        if (!u.getPassword().equals(password))
+	            throw new InvalidPasswordException();
+	        
+	        return u;
+	        
+	    } 
 	/**
 	 * This method retrieves the rides from two locations on a given date
 	 * 

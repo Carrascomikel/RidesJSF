@@ -11,6 +11,7 @@ import domain.User;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.UserAlreadyExistsException;
+import exceptions.InvalidPasswordException;
 import exceptions.RideAlreadyExistException;
 
 /**
@@ -98,6 +99,15 @@ public class BLFacadeImplementation  implements BLFacade {
 	public User addUser(String email, String name, String password, String rol) throws UserAlreadyExistsException {
 		dbManager.open();
 		User u=dbManager.addUser(email, name, password, rol);
+		dbManager.close();
+		return u;
+	}
+
+
+	@Override
+	public User login(String email, String password) throws InvalidPasswordException {
+		dbManager.open();
+		User u=dbManager.login(email, password);
 		dbManager.close();
 		return u;
 	}

@@ -9,6 +9,7 @@ import domain.User;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.UserAlreadyExistsException;
+import exceptions.InvalidPasswordException;
 import exceptions.RideAlreadyExistException;
 
 
@@ -79,5 +80,5 @@ public interface BLFacade  {
 	
 	public User addUser(String email,String name, String password, String rol) throws UserAlreadyExistsException;
 
-	
+	public User login(String email, String password) throws InvalidPasswordException;
 }
