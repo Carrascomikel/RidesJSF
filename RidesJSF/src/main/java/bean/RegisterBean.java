@@ -1,6 +1,9 @@
 package bean;
 
+import exceptions.UserAlreadyExistsException;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 @Named("register")
@@ -55,19 +58,21 @@ public class RegisterBean {
 
     	
         if (!pasahitza.equals(pasahitzaBerretsi)) {
-        	System.out.print("Pasahitza berdinak izan behar dute.");
         	return "register?faces-redirect=true&error=pasahitza";
             
         }
-
-        // TODO: Gordetzeko logika gehitu (datu-basea, etc.)
-        System.out.println("Erregistro berria:");
-        System.out.println("  Izena:  " + izena);
-        System.out.println("  Emaila: " + emaila);
-        System.out.println("  Rola:   " + rola);
-
-
-
-        return "login?faces-redirect=true";
+        try {
+        	FacadeBean.getBusinessLogic().addUser(emaila, izena,pasahitza, rola);
+        	 return "login";
+        }catch(UserAlreadyExistsException e) {
+        	FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "User with this email already exists", null));
+        	this.izena=null;
+        	this.emaila=null;
+        	this.pasahitza=null;
+        	this.pasahitzaBerretsi=null;
+        	this.rola=null;
+        	return "register?faces-redirect=true&error=User";
+        }
     }
 }

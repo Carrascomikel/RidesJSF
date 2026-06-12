@@ -133,7 +133,7 @@ public class DataAccess {
 		try {
 			System.out.println("><DataAccess: getUserByEmail=> email=" + email);
 			User user = null;
-			TypedQuery<User> query = db.createQuery("SELECT u FROM User WHERE u.email=:email", User.class);
+			TypedQuery<User> query = db.createQuery("SELECT u FROM User u WHERE u.email=?1", User.class);
 			query.setParameter(1, email);
 			user=query.getSingleResult();
 			return user;
