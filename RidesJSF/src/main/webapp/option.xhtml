@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html"
+      	xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -11,10 +11,9 @@
 <h:body>
     <h:form>
         <h3>Select an option</h3>
-        <h:commandButton value="Create Ride" action="#{O.goToCreateRide}" 
-                         styleClass="btn" rendered="#{login.driver}" />
-        <h:commandButton value="Query Rides" action="#{O.goToQueryRides}" 
-                         styleClass="btn" />
+        <h:link value="Create Ride" outcome="CreateRide" styleClass="link" rendered="#{login.driver}" />
+        <br />
+        <h:link value="Query Rides" outcome="QueryRides" styleClass="link"/>
     </h:form>
 </h:body>
 

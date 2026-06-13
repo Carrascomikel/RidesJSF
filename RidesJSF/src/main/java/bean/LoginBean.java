@@ -44,7 +44,13 @@ public class LoginBean implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+	public boolean isDriver() {
+		return user instanceof Driver;
+	}
+
+	public boolean isTraveler() {
+		return user instanceof Traveler;
+	}
 	public String goToQueryRides() {
 	    return "QueryRides?faces-redirect=true";
 	}
