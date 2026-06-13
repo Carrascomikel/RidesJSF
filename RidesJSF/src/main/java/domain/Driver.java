@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 
 @Entity
+@DiscriminatorValue("DRIVER")
 public class Driver extends User {
 	
 	/**

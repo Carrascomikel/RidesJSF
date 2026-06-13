@@ -45,6 +45,7 @@ public class LoginBean implements Serializable {
 		this.user = user;
 	}
 	public boolean isDriver() {
+		 System.out.println("isDriver - user: " + user + " - clase: " + (user != null ? user.getClass().getSimpleName() : "null"));
 		return user instanceof Driver;
 	}
 
@@ -63,10 +64,8 @@ public class LoginBean implements Serializable {
 				return "register?faces-redirect=true&error=User";
 			}
 			if (user instanceof Driver) {
-				System.out.print("Barrura Driver");
 				return "option";
 			} else if (user instanceof Traveler) {
-				System.out.print("Barrura Travler");
 				return "option";
 			}
 			return "register?faces-redirect=true&error=User";
