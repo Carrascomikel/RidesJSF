@@ -29,6 +29,7 @@ public class CreateRide implements Serializable {
 
 	public CreateRide() {
 		
+		
 	}
 	public String getDepartCity() {
 		return departCity;

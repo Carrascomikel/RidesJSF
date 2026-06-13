@@ -20,7 +20,7 @@ public class LoginBean implements Serializable {
 
 	public LoginBean() {
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
@@ -37,22 +37,40 @@ public class LoginBean implements Serializable {
 		this.pasahitza = pasahitza;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public String goToQueryRides() {
+	    return "QueryRides?faces-redirect=true";
+	}
 	public String egiaztatu() {
 		try {
-		user=FacadeBean.getBusinessLogic().login(email, pasahitza);
-		if (user==null)
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "There is no user with that email", null));
-		if(user instanceof Driver)
-			System.out.print("Barrura Driver");
-		else if (user instanceof Traveler)
-			System.out.print("Barrura Travler");
-		}catch(InvalidPasswordException e) {
+			user = FacadeBean.getBusinessLogic().login(email, pasahitza);
+			if (user == null) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "There is no user with that email", null));
+				return "register?faces-redirect=true&error=User";
+			}
+			if (user instanceof Driver) {
+				System.out.print("Barrura Driver");
+				return "option";
+			} else if (user instanceof Traveler) {
+				System.out.print("Barrura Travler");
+				return "option";
+			}
+			return "register?faces-redirect=true&error=User";
+		} catch (InvalidPasswordException e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrect password", null));
-			this.pasahitza=null;
-			this.email=null;
+			this.pasahitza = null;
+			this.email = null;
+			return "register?faces-redirect=true&error=User";
 		}
-			
+
 	}
 }

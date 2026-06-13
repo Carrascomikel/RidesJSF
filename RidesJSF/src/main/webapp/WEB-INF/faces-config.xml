@@ -1,25 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config
- xmlns="https://jakarta.ee/xml/ns/jakartaee"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+<faces-config xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
 https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
- version="3.0">
+	version="3.0">
 
- <navigation-rule>
-<display-name>Login.xhtml</display-name>
-<from-view-id>/Login.xhtml</from-view-id>
-<navigation-case>
-<from-outcome>register</from-outcome>
-<to-view-id>/Register.xhtml</to-view-id>
-</navigation-case>
-</navigation-rule>
-<navigation-rule>
-<display-name>Register.xhtml</display-name>
-<from-view-id>/Register.xhtml</from-view-id>
-<navigation-case>
-<from-outcome>login</from-outcome>
-<to-view-id>/Login.xhtml</to-view-id>
-</navigation-case>
-</navigation-rule>
+	<navigation-rule>
+		<display-name>Login.xhtml</display-name>
+		<from-view-id>/Login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>register</from-outcome>
+			<to-view-id>/Register.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Register.xhtml</display-name>
+		<from-view-id>/Register.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/Login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>Login.xhtml</display-name>
+		<from-view-id>/Login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>option</from-outcome>
+			<to-view-id>/option.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>option.xhtml</display-name>
+		<from-view-id>/option.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>createRide</from-outcome>
+			<to-view-id>/CreateRide.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>option.xhtml</display-name>
+		<from-view-id>/option.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>queryRides</from-outcome>
+			<to-view-id>/QueryRides.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>
